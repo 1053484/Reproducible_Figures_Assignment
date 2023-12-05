@@ -1,0 +1,50 @@
+---
+title: "Penguin_Analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#Install Packages
+install.packages("ggplot2")
+install.packages("palmerpenguins")
+install.packages("janitor")
+install.packages("dplyr")
+#Load Packages
+library(ggplot2)
+library(palmerpenguins)
+library(janitor)
+library(dplyr)
+```
+
+
+## QUESTION 01: Data Visualisation for Science Communication
+
+```{r bad figure code, echo=FALSE}
+ggplot(penguins_clean_species, aes(x = body_mass_g)) +
+      
+      geom_smooth(method="lm",
+                  aes(y=culmen_depth_mm, 
+                      colour = "Culmen Depth (mm)"))+
+      
+      geom_smooth(method="lm",
+                  aes(y=flipper_length_mm/12, 
+                      colour = "Flipper Length (mm)"))+
+      
+      scale_y_continuous(
+        name = "Culmen Depth (mm)", 
+        sec.axis = sec_axis(~ . *12, 
+                            name = "Flipper Length (mm)")) +
+      
+      scale_colour_manual(name = "Legend", 
+                          values = c("Culmen Depth (mm)" = "orangered",
+                                     "Flipper Length (mm)" = "seagreen2"))+
+      
+      labs(title="Relationship between culmen depth, flipper length and body mass", 
+           x="Body Mass (g)")+
+      theme_bw()
+```
+
+    
