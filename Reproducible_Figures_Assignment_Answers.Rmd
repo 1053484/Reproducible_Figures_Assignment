@@ -45,8 +45,9 @@ library(stringr)
 
 ```
 
+Candidate Number: 1053484
 
-## QUESTION 01: Data Visualisation for Science Communication
+# QUESTION 01: Data Visualisation for Science Communication
 
 ```{r bad figure code, echo=FALSE, warning=FALSE, message=FALSE}
 #Load clean data
@@ -94,13 +95,13 @@ This figure is a bad representation of the data; it plots two variables, culmen 
 
 One of which is that the Y axes don’t start at 0; without reading the scale of each y-axis, it could look like the range of data is spread equally for both culmen depth and flipper length. This has been achieved by transforming the flipper length scale to bring an overlap to the two variables. (Wikipedia contributors, 2023)
 
-Another important thing to note is that, unlike the linear model in the figure suggests, there isn't a linear relationship between culmen depth and body mass, at least when looking at all of the species together. If the data were divided between species, it would be evident that there is a positive correlation between culmen depth and body mass at the species level, but the Gentoo species have skewed the data due to their proportionally larger body mass and smaller culmen depth in comparison to the other species. The lack of data points on the graph also worsens this. If a scatter plot were used to show the data instead, there would be an evident split in the data for culmen depth.
+Another important thing to note is that, unlike the linear model in the figure suggests, there isn't a visually clear linear relationship between culmen depth and body mass, at least when looking at all of the species together. If the data were divided between species, it would be evident that there is a positive correlation between culmen depth and body mass within the species level, but the Gentoo species have skewed the Palmer penguin data due to their proportionally larger body mass and smaller culmen depth in comparison to the other species. The lack of data points on the graph also worsens this. If a scatter plot were used to show the data instead, there would be an evident split in the data points.
 
 Reference: Wikipedia contributors. (2023, September 5). Misleading graph. Wikipedia. https://en.wikipedia.org/wiki/Misleading_graph
 
-## QUESTION 2: Data Pipeline
+# QUESTION 2: Data Pipeline
 
-# Introduction
+## Introduction
 
 Using the Palmer Penguins dataset I want to look at the relationship between body mass and flipper length for one species.
 
@@ -216,7 +217,7 @@ save_plot_png(plot1,
 
 Looking at the data as a whole I can see that there is a linear relationship within species between body mass and flipper length. I will look specifically at the Chinstrap species for my hypothesis
 
-# Hypothesis
+## Hypothesis
 
 I hypothesize that there is a correlation between body mass and flipper length for the Chinstrap species. 
 
@@ -233,7 +234,7 @@ chinstrap_subset<-filter_by_species(
 head(chinstrap_subset)
 ```
 
-# Statistical Methods
+## Statistical Methods
 
 To test this hypothesis I will test the correlation with Pearsons Correlation Coefficient test. I first need to check that the data follows the assumptions of the test:
 
@@ -269,7 +270,7 @@ print(correlation_test)
 ```
 The results show that the correlation coefficient is estimated at 0.64 with a p-value of 3.74e-09
 
-# Results
+## Results
 
 I will plot our Chinstrap subset with a linear regression and our Correlation coefficient results
 
@@ -293,18 +294,18 @@ save_plot_png(chinstrap_correlation_figure,
               scaling =1)
 
 ```
-# Discussion
+## Discussion
 
 With the p-value of 3.748e-09 the null hypothesis can be rejected and we can confirm that there is a correlation between flipper length and body size for the Chinstrap species.
 
 A correlation coefficient estimate of 0.64 shows that there is a strong positive correlation between flipper length and body size within this species.
 
-# Conclusion
+## Conclusion
 
 In this data analysis of the Chinstrap species a strong positive correlation was found between body mass and flipper length. The data followed the assumptions of a Pearson correlation coefficient test and therefore we can accept the alternative hypothesis that there is a correlation between these two variables. I think this analysis will be useful for further analyses using this dataset which look at the correlations between two continuous variables.
 
 
-## QUESTION 3: Open Science
+# QUESTION 3: Open Science
 
 ### a) GitHub
 
@@ -316,22 +317,37 @@ In this data analysis of the Chinstrap species a strong positive correlation was
 
 ### b) Share your repo with a partner, download, and try to run their data pipeline.
 
-*Partner's GitHub link:*
+*Partner's GitHub link: https://github.com/Candidate1066540/ReproducibleScienceMT23_USE
 
-*You **must** provide this so I can verify there is no plagiarism between you and your partner.*
 
 ### c) Reflect on your experience running their code. (300-500 words)
 
--   *What elements of your partner's code helped you to understand their data pipeline?*
+Using the introductory section, my partner clearly outlined the Palmer penguin dataset and what it was compiled of, which helped me understand the rest of the analysis. I understood their data pipeline well and could clearly see how the raw data was loaded and saved. This raw data was then processed using several cleaning methods, including removing unnecessary columns that weren't required for the analysis. This produced a clean dataset, which was saved separately from the raw data. They then used the clean data to analyse two variables in the dataset, in this case, culmen depth and body mass. A clear hypothesis was constructed by which they wanted to test these variables in the dataset. They analysed the relationship between the two variables visually through the use of an exploratory figure as well as running a statistical analysis. They also visualised the statistical analysis results by plotting a linear regression. To ensure the completion of the data pipeline, the results figure should be saved in the repository so it can be easily accessed for reference.
 
--   *Did it run? Did you need to fix anything?*
+The only issue I had running the code fell in a cleaning function named “remove_NA”. This function wasn’t called upon in the code, but when I tried to use the function, I found an error code. I needed to change “penguins_clean” to “penguins_data” to fix this. 
 
--   *What suggestions would you make for improving their code to make it more understandable or reproducible, and why?*
+```{r, Code from partners analysis}
+remove_NA <- function(penguins_clean) {
+  penguins_data %>%
+    na.omit()
+}
+```
+To make the code more reproducible, I would suggest piping multiple cleaning functions and assigning them to one function. This would mean that only one function would need to be called if the data needed to be cleaned again. By saving this function in a separate cleaning functions script, it could be used across multiple analyses just by sourcing those functions from the script and not by searching for the function elsewhere, which could be easily lost. I would also suggest doing the same for the plots. This would make the plots more reproducible; this way, the code for the plot wouldn’t have to be copied multiple times when reproducing the analysis. It would also make the elements standard across each reproduced analysis, and the function would need to be edited to change them. 
 
--   *If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?*
+To make the code more understandable, I would suggest including the function “clean_names()” in the cleaning stage, making the column names uniform and easier to read and paste. I would also suggest breaking down aspects of the cleaning stage to explain what parts of the data are changing so that someone finds it easier to know when to use those functions.
+
+If I needed to alter my partner's figure by changing specific aspects, I think it would be quite easy; the plot isn't in a function, so I can edit the main script to change elements of the plot, such as colour and axis labels. This is risky for the main script; if I wanted to reproduce the results, it would be easy to get a different graph than the original analysis. 
+
 
 ### d) Reflect on your own code based on your experience with your partner's code and their review of yours. (300-500 words)
 
--   *What improvements did they suggest, and do you agree?*
+My partner suggested stating the obvious regarding sourcing my folders, which hold functions and data. They said this would benefit those with less knowledge of R and programming generally. I agree that I didn't explain the purpose of loading these files, how they provided the functions for cleaning my raw data, and how they created my plots. Further illustrating this would ensure that someone could edit the functions to replicate my analysis using different variables or analysing other datasets.
 
--   *What did you learn about writing code for other people?*
+Another suggestion made by my partner was that the correlation plot could have been better coloured to create more visual contrast for more accessible viewing. I agree that making the data points more visually prominent from the background would ensure clear results and reduce the risk of misinterpreting the figure. 
+
+Reflecting on my experience with my partner's analysis and what they did well, I believe that my hypothesis should have been formalised for my statistical test and that I could've further outlined my statistical results. This would have made my analysis more thorough. I also believe that I could've introduced the dataset better by showing the names of the columns to showcase all the variables that could be analysed and showing the total number of rows to showcase the sample size. Therefore, someone reading my analysis has the information to decide whether my sample size was sufficient for the analysis.
+
+I also reflect that parts of my code, like plotting functions, may be challenging to use without the context of my analysis for reference. I would need to explain more precisely what variables the function will be used to plot, especially for the vaguely named function "scatter_with_correlation". I should have outlined the x and y variables within the function and named the function something more related to those variables (e.g. "plot_body_mass_with_flipper_length"), removing any chance of confusion about when the function would be useful when reproducing the analysis. 
+
+I learned that for code to be reproduced by others, it is better to overexplain each process step than not explain enough. It is important to ensure that someone can understand how results were gathered by tracing the data pipeline. Therefore, if they wanted to test whether they could reproduce the same results from the data, they would know exactly how to achieve them. I also learned that functions can be useful when performing the same analyses multiple times. They can be saved into folders, which can be referred to when doing different analyses. Using clearly labelled folders to organise data, functions, and results is also essential for reproducibility so that others can easily access all stages of your analysis. 
+

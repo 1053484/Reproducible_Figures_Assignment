@@ -5,7 +5,10 @@
 ## Purpose of script: 
 ##      Cleaning up the raw penguin data set by changing column names and removing columns. 
 ##
+## Author: Dr. Lydia France
 ##
+## Sourced from Practical repository: 
+## Dr. Lydia France: https://github.com/LydiaFrance/PenguinProject/blob/main/functions/cleaning.r
 ##
 ##
 ##
