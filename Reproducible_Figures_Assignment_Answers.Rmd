@@ -196,6 +196,11 @@ subset_flipper_body_species<- subset_columns(
 #View subset
 
 head(subset_flipper_body_species)
+
+#Sace subset
+
+write.csv(subset_flipper_body_species, 
+          "Data/subset_flipper_body_species")
 ```
 We can see that this subset contains all the data we need, we can now go on to plot the subset.
 
@@ -232,6 +237,10 @@ chinstrap_subset<-filter_by_species(
 
 #View subset
 head(chinstrap_subset)
+
+#Save subset
+write.csv(chinstrap_subset, 
+          "Data/chinstrap_subset")
 ```
 
 ## Statistical Methods
@@ -311,9 +320,9 @@ In this data analysis of the Chinstrap species a strong positive correlation was
 
 *Upload your RProject you created for **Question 2** and any files and subfolders used to GitHub. Do not include any identifiers such as your name. Make sure your GitHub repo is public.*
 
-*GitHub link:*
+*GitHub link: https://github.com/841053/Reproducible_Figures_Assignment
 
-*You will be marked on your repo organisation and readability.*
+
 
 ### b) Share your repo with a partner, download, and try to run their data pipeline.
 
